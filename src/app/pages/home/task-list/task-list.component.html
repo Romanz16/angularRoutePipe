@@ -1,0 +1,57 @@
+<div id="container">
+        <h1>Plan your day!</h1>
+        <h1>Count of Task {{count}}</h1>
+      <hr>
+      <form action="" name="f2" id="form">
+          <div class="container">
+              <div class="row">
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" [(ngModel)]="task" name="task" placeholder="Enter Task">
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" *ngIf="!status"  (click)="addTask()"
+                    class="btn btn-success btn-block">Add Task</button>
+                </div>
+              </div> 
+            </div>
+      </form>
+      
+      <table class="table">
+          <thead>
+            <th scope="col">#</th>
+            <th scope="col">Task</th>
+            <th scope="col">Check</th>
+            <th scope="col">DONE/IN PROGERSS</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </thead>
+          <tbody id="tbody">
+            <tr *ngFor="let task of arrObjTask; let i=index">
+              <td>{{i+1}}</td>
+              <td>{{task.task}}</td>
+              <td> <input type="checkbox" [checked]="task.checker" (change)="isChange($event.target.checked ? true : false ,i)"></td>
+              <td><ng-container *ngIf="task.checker; then thenTemplate; else elseTemplate" [(ngModel)]="task.checker"></ng-container>
+              <ng-template #thenTemplate>
+                <p class='done'>Done</p>
+              </ng-template>
+              <ng-template #elseTemplate>
+                <p class="inProgress">IN PROGRESS</p>
+              </ng-template>
+              </td>
+              <td>
+                <button (click)="editTask(i)"  class="btn btn-warning">edit</button>
+              </td>
+              <td>
+                <button (click)="deleteTask(i)" [disabled]="!task.checker" class="btn btn-danger">delete</button>
+              </td>
+            </tr>
+      <tr class="trEdit" *ngIf="status"><td></td><td></td><td></td><td> <input type="text" class="form-control" [(ngModel)]="editTask1" name="editTask1">
+      </td><td><button type="button"   (click)="editSave()"
+        class="btn btn-success">save</button></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      
+      
+      <router-outlet></router-outlet>
+      

@@ -1,0 +1,16 @@
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col-2">
+      <div class="nav flex-column nav-pills">
+        <a class="nav-link" routerLinkActive="active" routerLink="taskList">Task List</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="taskObject">Task Object</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="taskPipe">Task Pipe</a>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="tab-content" id="v-pills-tabContent">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

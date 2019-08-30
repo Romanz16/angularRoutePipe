@@ -1,0 +1,23 @@
+h1{
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    font-size: 28px;
+    line-height: 36px;
+}
+#container{
+    padding: 0 100px;
+    margin: 0 auto;
+}
+.table{
+    margin: 15px 0;
+}
+.done{
+    color: green;
+}
+.inProgress{
+    color: red;
+}
+.trEdit{
+    background-color: rgb(212, 209, 209);
+} 

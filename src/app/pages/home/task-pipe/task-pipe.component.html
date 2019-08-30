@@ -1,0 +1,103 @@
+<h1>{{title}}</h1>
+<hr>
+<div class="main">
+  <form action="" name="f2" id="form">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9">
+          <input type="text" class="form-control" [(ngModel)]="searchText" name="searchText"
+            placeholder="search text goes here">
+        </div>
+        <div class="col-sm-3">
+          <button type="button" data-toggle="modal" data-target="#editModal" (click)="add()"
+            class="btn btn-success btn-block">Add
+            Phone</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <hr>
+
+  <table class="table table-striped table-bordered table-sm">
+    <thead>
+      <th scope="col" (click)="sort('fName',0)">First Name <ng-container *ngIf="sort1[0]==1">
+          <span>↑</span>
+        </ng-container>
+        <ng-container *ngIf="sort1[0]==2">
+          <span>↓</span>
+        </ng-container>
+      </th>
+      <th scope="col" (click)="sort('lName',1)">Last Name <ng-container *ngIf="sort1[1]==1">
+          <span>↑</span>
+        </ng-container>
+        <ng-container *ngIf="sort1[1]==2">
+          <span>↓</span>
+        </ng-container>
+      </th>
+      <th scope="col" (click)="sort('numPhone',2)">Number <ng-container *ngIf="sort1[2]==1">
+          <span>↑</span>
+        </ng-container>
+        <ng-container *ngIf="sort1[2]==2">
+          <span>↓</span>
+        </ng-container>
+      </th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </thead>
+    <tbody id="tbody">
+      <tr *ngFor="let user of arrUsers | search:searchText; let i=index">
+        <td>{{user.fName}}</td>
+        <td>{{user.lName}}</td>
+        <td> {{user.numPhone}}</td>
+        <td>
+          <button (click)="edit(i)" class="btn btn-warning" data-toggle="modal" data-target="#editModal">edit</button>
+        </td>
+        <td>
+          <button (click)="deleteUser(i)" class="btn btn-danger">delete</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <!--edit Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <ng-container *ngIf="statusAdd; else elseTemplate">
+              Додати
+            </ng-container>
+            <ng-template #elseTemplate>
+              Редагувати
+            </ng-template>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" name="f2" id="form1">
+            <div class="error">{{error}}</div>
+            <div class="success">{{success}}</div>
+            <label for="fName" class="col-form-label">First Name</label>
+            <input type="text" class="form-control" [(ngModel)]="fName" name="fName">
+            <label for="lName" class="col-form-label">Last Name</label>
+            <input type="text" class="form-control" [(ngModel)]="lName" name="lName">
+            <label for="phone" class="col-form-label">Phone</label>
+            <input type="text" class="form-control" [(ngModel)]="phone" name="phone">
+            <button type="button" *ngIf="statusAdd" style="margin-top: 10px;" (click)="addUser()"
+              class="btn btn-success btn-block">Додати</button>
+            <button type="button" *ngIf="!statusAdd" style="margin-top: 10px;" (click)="editSave()"
+              class="btn btn-warning btn-block">Зберегти</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- edit modal -->
+</div>
